@@ -1,18 +1,18 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { ChevronUp, ChevronDown } from "lucide-react"
 
 export default function GrubMenu({ onSelect }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [countdown, setCountdown] = useState(5)
 
-  const kernels = [
+  const kernels = useMemo(() => [
     { version: "6.1.0-1-amd64", name: "WeBOS Linux 6.1.0-1-amd64" },
     { version: "6.1.0-1-amd64-recovery", name: "WeBOS Linux 6.1.0-1-amd64 (recovery mode)" },
     { version: "5.15.0-3-amd64", name: "WeBOS Linux 5.15.0-3-amd64 (legacy)" },
     { version: "5.15.0-3-amd64-recovery", name: "WeBOS Linux 5.15.0-3-amd64 (legacy, recovery mode)" },
-  ]
+  ], [])
 
   useEffect(() => {
     const handleKeyDown = (e) => {
