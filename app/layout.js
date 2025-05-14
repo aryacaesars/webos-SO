@@ -1,13 +1,13 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "./providers";
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { Providers } from "./providers"
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "WeBOS - Web Based Operating System",
   description: "A web-based OS simulation experience",
-};
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -16,5 +16,5 @@ export default function RootLayout({ children }) {
         <Providers>{children}</Providers>
       </body>
     </html>
-  );
+  )
 }
