@@ -1,103 +1,234 @@
+import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, Terminal, Shield, Layers, Github } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="flex min-h-screen flex-col bg-[#111827] text-[#F4F4F9]">
+      <div className=" bg-[#1F2937] relative w-full overflow-hidden text-white">
+        {/* Abstract animated blobs */}
+        <div className="absolute -top-32 -left-32 w-[400px] h-[400px] rounded-full bg-[#1E91D6] opacity-70 blur-3xl animate-blob z-0" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#7F3CF0] opacity-70 blur-3xl animate-blob animation-delay-2000 z-0" />
+        <div className="absolute bottom-0 left-1/2 w-[300px] h-[300px] rounded-full bg-[#4F46E5] opacity-60 blur-2xl animate-blob animation-delay-4000 z-0" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        {/* Header */}
+        <header className="sticky top-0 z-50 w-full bg-transparent backdrop-blur">
+          <div className="container flex h-16 items-center justify-between mx-auto">
+            <Link href="/" className="flex items-center space-x-2">
+              <Terminal className="h-6 w-6 text-[#7F3CF0]" />
+              <span className="font-bold text-[#F4F4F9]">WeBOS</span>
+            </Link>
+            <nav className="flex items-center gap-8">
+              <Link
+                href="#features"
+                className="text-sm font-medium text-[#F4F4F9] hover:text-[#7F3CF0] hover:underline underline-offset-4"
+              >
+                Features
+              </Link>
+              <Link
+                href="#about"
+                className="text-sm font-medium text-[#F4F4F9] hover:text-[#7F3CF0] hover:underline underline-offset-4"
+              >
+                About
+              </Link>
+              <Link
+                href="/simulation"
+                className="rounded-md bg-gradient-to-r from-[#1E91D6] to-[#7F3CF0] px-4 py-2 text-sm font-medium text-white hover:brightness-110"
+              >
+                Try Now
+              </Link>
+            </nav>
+          </div>
+        </header>
+
+        {/* Hero */}
+        <section className="relative w-full py-20 overflow-hidden text-white">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
+              <div className="space-y-4">
+                <h1 className="text-4xl font-bold sm:text-5xl xl:text-6xl/none">
+                  Experience Linux on the Web
+                </h1>
+                <p className="max-w-[600px] text-white/90 md:text-xl">
+                  WeBOS is a web-based operating system simulation that lets you
+                  experience Linux KDE Plasma right in your browser. Complete
+                  with a working terminal, file system, and desktop environment.
+                </p>
+                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                  <Link
+                    href="/simulation"
+                    className="shadow transition inline-flex h-12 items-center justify-center rounded-md bg-gradient-to-r from-[#1E91D6] to-[#7F3CF0] px-8 text-sm font-medium text-white hover:brightness-110"
+                  >
+                    Try Simulation
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="#features"
+                    className="inline-flex h-12 items-center justify-center rounded-md border border-white bg-transparent px-8 text-sm font-medium text-white hover:bg-white hover:text-[#7F3CF0]"
+                  >
+                    Learn More
+                  </Link>
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <div className="relative h-[300px] w-full overflow-hidden rounded-xl shadow-lg md:h-[400px]">
+                  <Image
+                    src="/assets/img/image-hero.png"
+                    alt="WeBOS Desktop Preview"
+                    width={600}
+                    height={400}
+                    className="h-full w-full object-cover rounded-lg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Features */}
+      <section id="features" className="w-full py-20 bg-[#111827]">
+        <div className="container mx-auto px-4 md:px-6 text-center">
+          <h2 className="text-3xl font-bold sm:text-5xl mb-4">Features</h2>
+          <p className="text-[#CBD5E1] mb-12">
+            Explore the capabilities of our web-based operating system
+            simulation
+          </p>
+          <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+            {[
+              {
+                icon: <Terminal className="h-6 w-6" />,
+                title: "Working Terminal",
+                description:
+                  "Use real bash commands like mkdir, cd, chmod, cat, and more directly in your browser.",
+              },
+              {
+                icon: <Layers className="h-6 w-6" />,
+                title: "KDE Plasma Interface",
+                description:
+                  "Experience the look and feel of Linux KDE Plasma desktop environment with panels, widgets, and applications.",
+              },
+              {
+                icon: <Shield className="h-6 w-6" />,
+                title: "Boot Process",
+                description:
+                  "Complete boot sequence with GRUB menu, kernel selection, and login screen for an authentic experience.",
+              },
+            ].map((feature, idx) => (
+              <div
+                key={idx}
+                className="bg-[#1F2937] p-6 rounded-lg shadow text-left"
+              >
+                <div className="flex items-center justify-center w-12 h-12 mb-4 rounded bg-gradient-to-r from-[#1E91D6] to-[#7F3CF0] text-white">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                <p className="text-[#CBD5E1]">{feature.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* About us */}
+      <section id="about-us" className="w-full py-20 bg-[#1F2937]">
+        <div className="container mx-auto px-4 md:px-6">
+          <h2 className="text-3xl font-bold sm:text-4xl text-center mb-8">About Us</h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+            {[
+              {
+                nama: "Fatra Dika Herdiyanti",
+                npm: "237006049",
+                github: "https://github.com/fatradika",
+              },
+              {
+                nama: "Fadhil Gani",
+                npm: "237006082",
+                github: "https://github.com/padiil",
+              },
+              {
+                nama: "Rafli Putra Nursyabani",
+                npm: "237006083",
+                github: "https://github.com/Rafliputra237006083",
+              },
+              {
+                nama: "Arya Achmad Caesar",
+                npm: "237006093",
+                github: "https://github.com/aryacaesars",
+              },
+            ].map((member, idx) => (
+              <div key={idx} className="bg-[#111827] p-6 rounded-lg shadow text-center relative min-h-[180px]">
+                <h3 className="text-xl font-bold text-[#F4F4F9] mb-1">{member.nama}</h3>
+                <div className="absolute bottom-6 left-0 right-0">
+                  <p className="text-[#7F3CF0] font-medium mb-1">{member.npm}</p>
+                  <div className="border-t border-[#1F2937] mb-4"></div>
+                  <div className="flex justify-center">
+                    <Link
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F4F4F9] hover:text-[#7F3CF0] transition"
+                      aria-label={`GitHub ${member.nama}`}
+                    >
+                      <Github className="w-7 h-7" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="w-full py-20 bg-[#111827]">
+        <div className="container mx-auto px-4 md:px-6 grid gap-8 lg:grid-cols-2 items-center">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold sm:text-4xl">About WeBOS</h2>
+            <p className="text-[#CBD5E1] max-w-[600px]">
+              WeBOS is an educational project designed to help people learn
+              about Linux operating systems in an interactive way. Our
+              simulation provides a realistic experience of using a Linux
+              desktop environment without having to install anything.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold">Why WeBOS?</h3>
+            <p className="text-[#CBD5E1]">
+              Whether youre a student, developer, or just curious about Linux,
+              WeBOS provides a safe, accessible environment to explore and
+              learn.
+            </p>
+            <Link
+              href="/simulation"
+              className="inline-flex mt-4 h-12 items-center justify-center rounded-md bg-gradient-to-r from-[#1E91D6] to-[#7F3CF0] px-8 text-sm font-medium text-white hover:brightness-110"
+            >
+              Start Simulation
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="w-full py-6 bg-[#1F2937] text-[#CBD5E1]">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
+          <p className="text-sm text-center md:text-left">
+            © {new Date().getFullYear()} WeBOS. All rights reserved.
+          </p>
+          <div className="flex gap-4">
+            {["Terms", "Privacy", "Contact"].map((text, i) => (
+              <Link
+                key={i}
+                href="#"
+                className="text-sm hover:text-[#7F3CF0] hover:underline underline-offset-4"
+              >
+                {text}
+              </Link>
+            ))}
+          </div>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }
