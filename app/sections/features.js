@@ -31,7 +31,7 @@ export default function Features() {
           ].map((feature, idx) => (
             <div
               key={idx}
-              className="bg-[#1F2937] p-6 rounded-lg shadow text-left"
+              className="bg-[#1F2937] p-6 rounded-lg shadow text-left transform transition-transform duration-300 hover:scale-105 hover:shadow-[0_4px_20px_0_rgba(30,145,214,0.5),0_4px_20px_0_rgba(127,60,240,0.5)]"
             >
               <div className="flex items-center justify-center w-12 h-12 mb-4 rounded bg-gradient-to-r from-[#1E91D6] to-[#7F3CF0] text-white">
                 {feature.icon}

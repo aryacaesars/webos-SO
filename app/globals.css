@@ -49,3 +49,8 @@ body {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+.hover-shadow-gradient {
+  box-shadow: 0 4px 20px 0 rgba(30, 145, 214, 0.5), 0 4px 20px 0 rgba(127, 60, 240, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
