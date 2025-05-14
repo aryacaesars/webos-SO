@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Terminal, Shield, Layers } from "lucide-react";
+import { ArrowRight, Terminal, Shield, Layers, Github } from "lucide-react";
 
 export default function Home() {
   return (
@@ -128,58 +128,55 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+</section>
 
 {/* About us */}
-<section id="about us" className="w-full py-20 bg-[#111827]">
+<section id="about-us" className="w-full py-20 bg-[#1F2937]">
   <div className="container mx-auto px-4 md:px-6">
     <h2 className="text-3xl font-bold sm:text-4xl text-center mb-8">About Us</h2>
-    <p className="text-[#CBD5E1] max-w-[800px] mx-auto text-center mb-12">
-      WeBOS is an educational project crafted by a passionate team of four innovators dedicated to making Linux accessible and engaging. Our simulation brings the Linux KDE Plasma experience to your browser, fostering learning and exploration without the need for installation.
-    </p>
     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
       {[
         {
           nama: "Fatra Dika Herdiyanti",
           npm: "237006049",
-          
+          github: "https://github.com/fatradika",
         },
         {
           nama: "Fadhil Gani",
           npm: "237006082",
-          
+          github: "https://github.com/padiil",
         },
         {
           nama: "Rafli Putra Nursyabani",
           npm: "237006083",
-          
+          github: "https://github.com/Rafliputra237006083",
         },
         {
           nama: "Arya Achmad Caesar",
           npm: "237006093",
-          
+          github: "https://github.com/aryacaesars",
         },
       ].map((member, idx) => (
-        <div key={idx} className="bg-[#1F2937] p-6 rounded-lg shadow text-center">
-          <h3 className="text-xl font-bold text-[#F4F4F9] mb-2">{member.nama}</h3>
+        <div key={idx} className="bg-[#111827] p-6 rounded-lg shadow text-center">
+          <h3 className="text-xl font-bold text-[#F4F4F9] mb-1">{member.nama}</h3>
           <p className="text-[#7F3CF0] font-medium mb-2">{member.npm}</p>
-          <p className="text-[#CBD5E1] text-sm">{member.description}</p>
+          <div className="flex justify-center mt-2">
+            <Link
+              href={member.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#F4F4F9] hover:text-[#7F3CF0] transition"
+              aria-label={`GitHub ${member.nama}`}
+            >
+              <Github className="w-7 h-7" />
+            </Link>
+          </div>
         </div>
       ))}
     </div>
-    <div className="text-center mt-8">
-      <Link
-        href="/simulation"
-        className="inline-flex mt-4 h-12 items-center justify-center rounded-md bg-gradient-to-r from-[#1E91D6] to-[#7F3CF0] px-8 text-sm font-medium text-white hover:brightness-110"
-      >
-        Start Simulation
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </Link>
-    </div>
   </div>
 </section>
-
-      {/* About */}
+{/* About */}
       <section id="about" className="w-full py-20 bg-[#111827]">
         <div className="container mx-auto px-4 md:px-6 grid gap-8 lg:grid-cols-2 items-center">
           <div className="space-y-4">
