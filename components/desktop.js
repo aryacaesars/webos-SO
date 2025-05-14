@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react";
 import {
   TerminalIcon,
   Folder,
@@ -16,67 +16,88 @@ import {
   Volume2,
   Calendar,
   Search,
-} from "lucide-react"
-import Terminal from "./terminal"
-import FileExplorer from "./file-explorer"
-import { useFileSystem } from "@/lib/use-file-system"
+} from "lucide-react";
+import Terminal from "./terminal";
+import FileExplorer from "./file-explorer";
+import { useFileSystem } from "@/lib/use-file-system";
 
 export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
-  const [time, setTime] = useState(new Date())
-  const [isStartMenuOpen, setIsStartMenuOpen] = useState(false)
-  const [openApps, setOpenApps] = useState([])
-  const [activeAppId, setActiveAppId] = useState(null)
-  const [isSystemMenuOpen, setIsSystemMenuOpen] = useState(false)
-  const startMenuRef = useRef(null)
-  const systemMenuRef = useRef(null)
-  const { fileSystem } = useFileSystem()
+  const [time, setTime] = useState(new Date());
+  const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
+  const [openApps, setOpenApps] = useState([]);
+  const [activeAppId, setActiveAppId] = useState(null);
+  const [isSystemMenuOpen, setIsSystemMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // State for fade-in animation
+  const startMenuRef = useRef(null);
+  const systemMenuRef = useRef(null);
+  const { fileSystem } = useFileSystem();
 
   useEffect(() => {
+    // Play startup sound when Desktop is loaded
+    const audio = new Audio("/assets/sounds/reactos-boot-85864.mp3");
+    audio
+      .play()
+      .catch((error) => console.error("Failed to play sound:", error));
+
+    // Trigger fade-in animation
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 500); // Delay to sync with sound
+
     const timer = setInterval(() => {
-      setTime(new Date())
-    }, 1000)
+      setTime(new Date());
+    }, 1000);
 
     const handleClickOutside = (event) => {
-      if (startMenuRef.current && !startMenuRef.current.contains(event.target)) {
-        setIsStartMenuOpen(false)
+      if (
+        startMenuRef.current &&
+        !startMenuRef.current.contains(event.target)
+      ) {
+        setIsStartMenuOpen(false);
       }
-      if (systemMenuRef.current && !systemMenuRef.current.contains(event.target)) {
-        setIsSystemMenuOpen(false)
+      if (
+        systemMenuRef.current &&
+        !systemMenuRef.current.contains(event.target)
+      ) {
+        setIsSystemMenuOpen(false);
       }
-    }
+    };
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      clearInterval(timer)
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [])
+      clearInterval(timer);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const openApp = (app) => {
-    // Check if app is already open
-    const existingApp = openApps.find((a) => a.type === app.type)
+    const existingApp = openApps.find((a) => a.type === app.type);
     if (existingApp) {
-      setActiveAppId(existingApp.id)
+      setActiveAppId(existingApp.id);
     } else {
-      const newApp = { ...app, id: Date.now() }
-      setOpenApps([...openApps, newApp])
-      setActiveAppId(newApp.id)
+      const newApp = { ...app, id: Date.now() };
+      setOpenApps([...openApps, newApp]);
+      setActiveAppId(newApp.id);
     }
-    setIsStartMenuOpen(false)
-  }
+    setIsStartMenuOpen(false);
+  };
 
   const closeApp = (id) => {
-    setOpenApps(openApps.filter((app) => app.id !== id))
+    setOpenApps(openApps.filter((app) => app.id !== id));
     if (activeAppId === id) {
-      const remainingApps = openApps.filter((app) => app.id !== id)
-      setActiveAppId(remainingApps.length > 0 ? remainingApps[remainingApps.length - 1].id : null)
+      const remainingApps = openApps.filter((app) => app.id !== id);
+      setActiveAppId(
+        remainingApps.length > 0
+          ? remainingApps[remainingApps.length - 1].id
+          : null
+      );
     }
-  }
+  };
 
   const bringToFront = (id) => {
-    setActiveAppId(id)
-  }
+    setActiveAppId(id);
+  };
 
   const apps = [
     {
@@ -102,10 +123,14 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
         </div>
       ),
     },
-  ]
+  ];
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-900 to-purple-900 overflow-hidden">
+    <div
+      className={`flex flex-col h-screen bg-gradient-to-br from-blue-900 to-purple-900 overflow-hidden transition-opacity duration-1000 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
       {/* Desktop */}
       <div className="flex-1 relative">
         {/* Desktop Icons */}
@@ -116,8 +141,12 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
               className="flex flex-col items-center justify-center w-20 h-20 rounded hover:bg-white/10 cursor-pointer"
               onClick={() => openApp(app)}
             >
-              <div className="w-10 h-10 flex items-center justify-center bg-blue-700 rounded-lg mb-1">{app.icon}</div>
-              <span className="text-xs text-center text-white">{app.title}</span>
+              <div className="w-10 h-10 flex items-center justify-center bg-blue-700 rounded-lg mb-1">
+                {app.icon}
+              </div>
+              <span className="text-xs text-center text-white">
+                {app.title}
+              </span>
             </div>
           ))}
         </div>
@@ -153,8 +182,8 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
                 <button
                   className="p-1 hover:bg-red-700 rounded"
                   onClick={(e) => {
-                    e.stopPropagation()
-                    closeApp(app.id)
+                    e.stopPropagation();
+                    closeApp(app.id);
                   }}
                 >
                   <X className="h-4 w-4" />
@@ -163,7 +192,9 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
             </div>
 
             {/* Window Content */}
-            <div className="h-[calc(100%-2.5rem)] overflow-auto">{app.content}</div>
+            <div className="h-[calc(100%-2.5rem)] overflow-auto">
+              {app.content}
+            </div>
           </div>
         ))}
       </div>
@@ -173,7 +204,9 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
         {/* Start Button */}
         <div className="relative" ref={startMenuRef}>
           <button
-            className={`flex items-center justify-center h-8 w-8 rounded-full ${isStartMenuOpen ? "bg-blue-600" : "hover:bg-gray-700"}`}
+            className={`flex items-center justify-center h-8 w-8 rounded-full ${
+              isStartMenuOpen ? "bg-blue-600" : "hover:bg-gray-700"
+            }`}
             onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
           >
             <span className="text-white font-bold">W</span>
@@ -195,14 +228,18 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
 
               {/* Apps List */}
               <div className="p-2">
-                <div className="text-xs text-gray-400 px-2 py-1">Applications</div>
+                <div className="text-xs text-gray-400 px-2 py-1">
+                  Applications
+                </div>
                 {apps.map((app, index) => (
                   <div
                     key={index}
                     className="flex items-center px-3 py-2 rounded hover:bg-gray-800 cursor-pointer"
                     onClick={() => openApp(app)}
                   >
-                    <div className="w-6 h-6 flex items-center justify-center bg-blue-700 rounded mr-3">{app.icon}</div>
+                    <div className="w-6 h-6 flex items-center justify-center bg-blue-700 rounded mr-3">
+                      {app.icon}
+                    </div>
                     <span className="text-sm">{app.title}</span>
                   </div>
                 ))}
@@ -242,7 +279,11 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
             <div
               key={app.id}
               className={`flex items-center px-3 py-1 rounded cursor-pointer
-                        ${activeAppId === app.id ? "bg-gray-700" : "hover:bg-gray-800"}`}
+                        ${
+                          activeAppId === app.id
+                            ? "bg-gray-700"
+                            : "hover:bg-gray-800"
+                        }`}
               onClick={() => bringToFront(app.id)}
             >
               {app.icon}
@@ -301,7 +342,9 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
                     </div>
                     <div className="flex items-center">
                       <Calendar className="h-4 w-4 text-gray-400 mr-2" />
-                      <span className="text-xs">{time.toLocaleDateString()}</span>
+                      <span className="text-xs">
+                        {time.toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -311,5 +354,5 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
