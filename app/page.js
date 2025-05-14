@@ -1,9 +1,9 @@
-import Header from "./sections/navbar";
-import Hero from "./sections/hero";
-import Features from "./sections/features";
-import Footer from "./sections/footer";
-import AboutWebos from "./sections/about-webos";
-import AboutUs from "./sections/about-us";
+import Header from "../components/sections/navbar";
+import Hero from "../components/sections/hero";
+import Features from "../components/sections/features";
+import Footer from "../components/sections/footer";
+import AboutWebos from "../components/sections/about-webos";
+import AboutUs from "../components/sections/about-us";
 
 export default function Home() {
   return (
