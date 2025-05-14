@@ -167,15 +167,7 @@ export default function Home() {
         </div>
       ))}
     </div>
-    <div className="text-center mt-8">
-      <Link
-        href="/simulation"
-        className="inline-flex mt-4 h-12 items-center justify-center rounded-md bg-gradient-to-r from-[#1E91D6] to-[#7F3CF0] px-8 text-sm font-medium text-white hover:brightness-110"
-      >
-        Start Simulation
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </Link>
-    </div>
+
   </div>
 </section>
 
