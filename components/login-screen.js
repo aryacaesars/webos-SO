@@ -20,7 +20,7 @@ export default function LoginScreen({ onLogin }) {
     if (password === "password") {
       onLogin(username, password)
     } else {
-      setError('Invalid credentials. Try password: "password"')
+      setError('Invalid credentials. Try password: &quot;password&quot;')
     }
   }
 
@@ -73,7 +73,7 @@ export default function LoginScreen({ onLogin }) {
           </div>
 
           <div className="text-center text-xs text-gray-400">
-            <p>Hint: Use "password" as the password</p>
+            <p>Hint: Use &quot;password&quot; as the password</p>
           </div>
         </form>
       </div>

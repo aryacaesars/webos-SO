@@ -28,7 +28,8 @@ export default function Terminal() {
       inputRef.current?.focus()
     }
 
-    terminalRef.current?.addEventListener("click", handleClick)
+    const terminal = terminalRef.current
+    terminal?.addEventListener("click", handleClick)
 
     // Initial welcome message
     setHistory([
@@ -37,7 +38,7 @@ export default function Terminal() {
     ])
 
     return () => {
-      terminalRef.current?.removeEventListener("click", handleClick)
+      terminal?.removeEventListener("click", handleClick)
     }
   }, [])
 
