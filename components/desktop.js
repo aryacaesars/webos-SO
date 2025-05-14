@@ -16,9 +16,11 @@ import {
   Volume2,
   Calendar,
   Search,
+  Cpu,
 } from "lucide-react"
 import Terminal from "./terminal"
 import FileExplorer from "./file-explorer"
+import CPUScheduler from "./cpu-scheduler"
 import { useFileSystem } from "@/lib/use-file-system"
 
 export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
@@ -101,6 +103,12 @@ export default function Desktop({ user, onLogout, onRestart, onShutdown }) {
           <p>This is a placeholder for system settings.</p>
         </div>
       ),
+    },
+    {
+      type: "cpuScheduler",
+      title: "CPU Scheduler",
+      icon: <Cpu className="h-5 w-5" />,
+      content: <CPUScheduler />,
     },
   ]
 
